@@ -1,7 +1,4 @@
-﻿datetime
-pandas
-fastapi
-requests
-jinja2
+﻿fastapi
 uvicorn
 databases[sqlite]
+jinja2
