@@ -52,4 +52,4 @@ async def read_form(request: Request):
     rows = database.fetch_all(query=query)
     # Desconectar de la base de datos
     database.disconnect()
-    return templates.TemplateResponse("form.html", {"request": rows})
+    return templates.TemplateResponse({"request": rows})
