@@ -43,7 +43,7 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
 
 
 @app.get("/show_data/")
-async def show_data(request: Request):
+async def show_data():
     # Conectar a la base de datos
     database.connect()
 
@@ -54,7 +54,7 @@ async def show_data(request: Request):
     # Desconectar de la base de datos
     database.disconnect()
 
-    return  {"request": request, "data": result}
+    return  { "data": result}
 # Nueva ruta para redirigir a la página que muestra todos los datos
 @app.get("/all_data/")
 async def all_data(request: Request):
