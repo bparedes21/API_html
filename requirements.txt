@@ -2,3 +2,4 @@
 uvicorn
 databases[sqlite]
 jinja2
+python-multipart
