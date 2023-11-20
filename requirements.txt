@@ -3,3 +3,4 @@ pandas
 fastapi
 requests
 jinja2
+uvicorn
