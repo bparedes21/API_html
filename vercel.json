@@ -1,7 +1,8 @@
 
 {
   "builds": [
-    {"src": "/FastAPI1.py", "use": "@vercel/python"}
+    {"src": "/FastAPI1.py", "use": "@vercel/python"},
+    { "src": "*.html", "use": "@vercel/static" }
   ],
   "routes": [
     {"src": "/(.*)", "dest": "FastAPI1.py"}
