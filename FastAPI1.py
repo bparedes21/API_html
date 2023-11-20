@@ -41,7 +41,7 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
 
     return templates.TemplateResponse("submitted.html", {"request": request, "title": title, "content": content})
 
-@app.get("/")
+@app.get("/select/")
 async def read_form(request: Request):
     # Conexión a la base de datos
     database.connect()
