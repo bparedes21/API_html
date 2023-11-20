@@ -4,3 +4,4 @@ fastapi
 requests
 jinja2
 uvicorn
+databases[sqlite]
