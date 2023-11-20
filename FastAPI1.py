@@ -54,8 +54,10 @@ async def show_data(request: Request):
     # Desconectar de la base de datos
     database.disconnect()
 
-    return templates.TemplateResponse("show_data.html", {"request": request, "data": result})
+    return  {"request": request, "data": result}
 # Nueva ruta para redirigir a la página que muestra todos los datos
 @app.get("/all_data/")
 async def all_data(request: Request):
+
+
     return templates.TemplateResponse("show_data.html", {"request": request})
