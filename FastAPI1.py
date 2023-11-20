@@ -41,8 +41,8 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
 
     return templates.TemplateResponse("submitted.html", {"request": request, "title": title, "content": content})
 
-@app.get("/select/")
-async def read_form(request: Request):
+@app.get("/show_data/")
+async def show_data(request: Request):
     # Conexión a la base de datos
     database.connect()
 
@@ -53,3 +53,7 @@ async def read_form(request: Request):
     # Desconectar de la base de datos
     database.disconnect()
     return templates.TemplateResponse("show_data.html", {"request": request, "data": rows})
+# Nueva ruta para redirigir a la página que muestra todos los datos
+@app.get("/all_data/")
+async def all_data(request: Request):
+    return templates.TemplateResponse("show_data.html", {"request": request})
