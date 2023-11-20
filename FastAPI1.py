@@ -40,3 +40,18 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
     database.disconnect()
 
     return templates.TemplateResponse("submitted.html", {"request": request, "title": title, "content": content})
+
+@app.get("/")
+async def read_form(request: Request):
+    # Conexión a la base de datos
+    database.connect()
+
+    # Crear una tabla si no existe
+    result=database.execute(
+        """
+        SELECT * notes
+        """
+    )
+    # Desconectar de la base de datos
+    database.disconnect()
+    return templates.TemplateResponse("form.html", {"request": result})
