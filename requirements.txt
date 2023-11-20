@@ -1,0 +1,5 @@
+﻿datetime
+pandas
+fastapi
+requests
+jinja2

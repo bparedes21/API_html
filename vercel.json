@@ -1,0 +1,9 @@
+
+{
+  "builds": [
+    {"src": "/FastAPI.py", "use": "@vercel/python"}
+  ],
+  "routes": [
+    {"src": "/(.*)", "dest": "FastAPI.py"}
+  ]
+}
