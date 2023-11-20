@@ -41,18 +41,36 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
 
     return templates.TemplateResponse("submitted.html", {"request": request, "title": title, "content": content})
 
+from fastapi import FastAPI, Form, Request
+from fastapi.templating import Jinja2Templates
+from databases import Database
+
+app = FastAPI()
+
+# Configuración de la base de datos SQLite
+DATABASE_URL = "sqlite:///./test.db"
+database = Database(DATABASE_URL)
+
+# Configuración de plantillas Jinja2
+templates = Jinja2Templates(directory="templates")
+
+# ...
+
+# Nueva ruta para mostrar todos los datos
 @app.get("/show_data/")
 async def show_data(request: Request):
-    # Conexión a la base de datos
+    # Conectar a la base de datos
     database.connect()
 
-    # Crear una tabla si no existe
-    # Fetch multiple rows
+    # Consultar todos los datos
     query = "SELECT * FROM notes"
-    rows = database.fetch_all(query=query)
+    result =  database.fetch_all(query)
+
     # Desconectar de la base de datos
     database.disconnect()
-    return templates.TemplateResponse("show_data.html", {"request": request, "data": rows})
+
+    return templates.TemplateResponse("show_data.html", {"request": request, "data": result})
+
 # Nueva ruta para redirigir a la página que muestra todos los datos
 @app.get("/all_data/")
 async def all_data(request: Request):
