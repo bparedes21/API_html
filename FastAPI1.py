@@ -4,9 +4,13 @@ from databases import Database
 
 app = FastAPI()
 
+# Configuración de la base de datos SQLite
+DATABASE_URL = "sqlite:///./test.db"
+database = Database(DATABASE_URL)
 
 # Configuración de plantillas Jinja2
 templates = Jinja2Templates(directory="templates")
+
 # Ruta para el formulario
 @app.get("/")
 async def read_form(request: Request):
@@ -16,6 +20,23 @@ async def read_form(request: Request):
 @app.post("/submit/")
 async def submit_form(request: Request, title: str = Form(...), content: str = Form(...)):
     # Conexión a la base de datos
+    database.connect()
 
+    # Crear una tabla si no existe
+    database.execute(
+        """
+        CREATE TABLE IF NOT EXISTS notes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            content TEXT
+        )
+        """
+    )
+
+    # Insertar datos en la tabla
+    database.execute("INSERT INTO notes (title, content) VALUES (:title, :content)", values={"title": title, "content": content})
+
+    # Desconectar de la base de datos
+    database.disconnect()
 
     return templates.TemplateResponse("submitted.html", {"request": request, "title": title, "content": content})
