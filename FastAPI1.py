@@ -49,7 +49,7 @@ async def read_form(request: Request):
     # Crear una tabla si no existe
     # Fetch multiple rows
     query = "SELECT * FROM notes"
-    rows = await database.fetch_all(query=query)
+    rows = database.fetch_all(query=query)
     # Desconectar de la base de datos
     database.disconnect()
     return templates.TemplateResponse("form.html", {"request": rows})
