@@ -15,7 +15,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def read_form(request: Request):
     return templates.TemplateResponse("form.html", {"request": request})
-
+"""
 # Ruta para procesar el formulario
 @app.post("/submit/")
 async def submit_form(request: Request, title: str = Form(...), content: str = Form(...)):
@@ -24,13 +24,14 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
 
     # Crear una tabla si no existe
     await database.execute(
-        """
-        CREATE TABLE IF NOT EXISTS notes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT,
-            content TEXT
-        )
-        """
+        
+   #     CREATE TABLE IF NOT EXISTS notes (
+   #        id INTEGER PRIMARY KEY AUTOINCREMENT,
+   #         title TEXT,
+   #         content TEXT
+   #     )
+        
+   
     )
 
     # Insertar datos en la tabla
@@ -40,3 +41,4 @@ async def submit_form(request: Request, title: str = Form(...), content: str = F
     await database.disconnect()
 
     return templates.TemplateResponse("submitted.html", {"request": request, "title": title, "content": content})
+    """
